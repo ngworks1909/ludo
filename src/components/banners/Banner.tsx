@@ -163,7 +163,7 @@ export default function BannerPage() {
 
   const updateBanner = async() => {
     if (editingBanner) {
-      const response = await fetch(`https://ludo-backend-z1io.onrender.com/api/banner/updatebanner/${editingBanner.id}`, {
+      const response = await fetch(`https://klikverse-production.up.railway.app/api/banner/updatebanner/${editingBanner.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -194,7 +194,7 @@ export default function BannerPage() {
   }
 
   useEffect(() => {
-    fetch("https://ludo-backend-z1io.onrender.com/api/banner/fetchallbanners", {
+    fetch("https://klikverse-production.up.railway.app/api/banner/fetchallbanners", {
       method: "GET",
     }).then((response) => {
       if(response.status === 200){
