@@ -122,7 +122,7 @@ export default function BannerPage() {
   const deleteBanner = async(id: string) => {
 
     try {
-      const response = await fetch(`https://ludo-backend-z1io.onrender.com/api/banner/deletebanner/${id}`, {
+      const response = await fetch(`https://klikverse-production.up.railway.app/api/banner/deletebanner/${id}`, {
         method: "DELETE"
       })
       if(response.status === 200){
