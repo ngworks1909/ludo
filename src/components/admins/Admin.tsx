@@ -142,7 +142,7 @@ export default function AdminManagement() {
 
   const handleTransfer = async (newSuperadminId: string) => {
     try {
-      const response = await fetch(`https://klikverse-production.up.railway.app/api/admin/transfer${newSuperadminId}`, {
+      const response = await fetch(`https://klikverse-production.up.railway.app/api/admin/transfer/${newSuperadminId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -211,7 +211,7 @@ export default function AdminManagement() {
               <Card key={admin.adminId}>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">{admin.name}</CardTitle>
-                  <Badge variant={admin.role === 'superadmin' ? "destructive" : "secondary"}>
+                  <Badge variant={admin.role === 'superadmin' ? "default" : "secondary"}>
                     {admin.role}
                   </Badge>
                 </CardHeader>
