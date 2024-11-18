@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Navbar from "../common/Navbar"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -8,8 +8,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { User, Phone, IndianRupee, Search, Gamepad2, Trophy, TrendingUp, TrendingDown, Wallet, X } from "lucide-react"
 import { Badge } from '../ui/badge'
 import { Skeleton } from '../ui/skeleton'
+import { useUsers } from '@/hooks/useUsers'
 
-type User = {
+export type User = {
   userId: string;
   username: string;
   mobile: string;
@@ -46,29 +47,13 @@ const SkeletonCard = () => (
 )
 
 export default function Users() {
-  const [users, setUsers] = useState<User[]>([])
-  const [loading, setLoading] = useState(true)
+  const {users, loading} = useUsers()
   const [searchTerm, setSearchTerm] = useState('')
 
   const filteredUsers = users.filter(user => 
     user.username.toLowerCase().startsWith(searchTerm.toLowerCase()) ||
     user.mobile.includes(searchTerm)
   )
-
-
-  useEffect(() => {
-    fetch("https://klikverse-production.up.railway.app/api/user/fetchalluser", {
-      method: "GET"
-    }).then((response) => {
-      if(response.ok){
-        response.json().then((data) => {
-          const fetchedusers: User[] = data.users || []
-          setUsers(fetchedusers)
-        })
-      }
-      setLoading(false)
-    })
-  }, [])
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-gray-100 dark:bg-gray-900">

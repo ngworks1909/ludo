@@ -48,7 +48,7 @@ export default function Navbar() {
       variant: "destructive"
     });
     setAuth(null);
-    navigate("/");
+    navigate("/login");
   };
 
   useEffect(() => {
