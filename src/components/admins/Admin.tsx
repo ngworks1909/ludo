@@ -323,8 +323,7 @@ export default function AdminManagement() {
                     <CardFooter>
                       <Button 
                         onClick={() => handleTransfer(admin.adminId)}
-                        className="w-full"
-                      >
+                        className="w-full">
                         Transfer Role
                       </Button>
                     </CardFooter>
