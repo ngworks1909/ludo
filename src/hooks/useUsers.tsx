@@ -11,7 +11,6 @@ export const useUsers = () => {
           if(response.ok){
             response.json().then((data) => {
               const fetchedusers: User[] = data.users || []
-              console.log(fetchedusers)
               setUsers(fetchedusers)
             })
           }
