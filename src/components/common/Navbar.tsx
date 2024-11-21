@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Activity, Bot, Image, LayoutDashboard, Menu, Users, UserCog } from "lucide-react";
+import {  Image, LayoutDashboard, Menu, Users, UserCog, Bell, Gamepad2 } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { authTokenState, userRoleState } from "@/store/AuthState";
@@ -26,9 +26,11 @@ const allNavItems = [
   { name: "Admins", href: "/admins", icon: Users, roles: ["superadmin", "admin"] },
   { name: "Banners", href: "/banners", icon: Image, roles: ["superadmin", "admin"] },
   { name: "Users", href: "/users", icon: Users, roles: ["superadmin", "admin"] },
-  { name: "Activity", href: "/activity", icon: Activity, roles: ["superadmin", "admin", "employee"] },
-  { name: "Bots Activity", href: "/bots-activity", icon: Bot, roles: ["superadmin", "admin", "employee"] },
+  // { name: "Activity", href: "/activity", icon: Activity, roles: ["superadmin", "admin", "employee"] },
+  // { name: "Bots Activity", href: "/bots-activity", icon: Bot, roles: ["superadmin", "admin", "employee"] },
   { name: "Support", href: "/support", icon: UserCog, roles: ["superadmin", "admin", "employee"] },
+  { name: "Notifications", href: "/notifications", icon: Bell, roles: ["superadmin", "admin", "employee"] },
+  { name: "Games", href: "/games", icon: Gamepad2, roles: ["superadmin", "admin", "employee"] },
 ];
 
 export default function Navbar() {

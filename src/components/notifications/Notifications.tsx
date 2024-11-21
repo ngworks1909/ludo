@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/hooks/use-toast"
 import { useRecoilValue } from 'recoil'
 import { authTokenState } from '@/store/AuthState'
+import Navbar from '../common/Navbar'
 
 export default function PushNotificationSender() {
   const [title, setTitle] = useState('')
@@ -62,34 +63,39 @@ export default function PushNotificationSender() {
   }
 
   return (
-    <div className="max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Send Push Notification</h1>
-      <form onSubmit={handleSend} className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="title">Title</Label>
-          <Input
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter notification title"
-            required
-          />
+    <div className="flex min-h-screen w-full flex-col">
+      <Navbar />
+      <main className="flex-1 overflow-auto p-4 md:p-6 flex items-center justify-center bg-gray-50">
+        <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
+          <h1 className="text-2xl font-bold mb-6 text-center">Send Push Notification</h1>
+          <form onSubmit={handleSend} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="title">Title</Label>
+              <Input
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter notification title"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="body">Body</Label>
+              <Textarea
+                id="body"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+                placeholder="Enter notification body"
+                required
+                className="min-h-[100px]"
+              />
+            </div>
+            <Button type="submit" className="w-full" disabled={isSending}>
+              {isSending ? 'Sending...' : 'Send Notification'}
+            </Button>
+          </form>
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="body">Body</Label>
-          <Textarea
-            id="body"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            placeholder="Enter notification body"
-            required
-            className="min-h-[100px]"
-          />
-        </div>
-        <Button type="submit" className="w-full" disabled={isSending}>
-          {isSending ? 'Sending...' : 'Send Notification'}
-        </Button>
-      </form>
+      </main>
     </div>
   )
 }

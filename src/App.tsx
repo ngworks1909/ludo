@@ -6,11 +6,12 @@ import Dashboard from './components/dashboard/Dashboard';
 import Admin from './components/admins/Admin';
 import Banner from './components/banners/Banner';
 import User from './components/users/User';
-import Activity from './components/activity/Activity';
-import BotActivity from './components/botsactivity/BotActivity';
+// import Activity from './components/activity/Activity';
+// import BotActivity from './components/botsactivity/BotActivity';
 import Login from './components/login/Login';
 import Support from './components/support/Support';
 import Notifications from './components/notifications/Notifications';
+import Games from './components/games/Games';
 // import ForgotPassword from './components/login/ForgotPassword';
 
 const ProtectedRoute: React.FC<{ 
@@ -42,10 +43,11 @@ function AppRoutes() {
       <Route path="/admins" element={<ProtectedRoute element={<Admin />} allowedRoles={['admin', 'superadmin']} />} />
       <Route path="/banners" element={<ProtectedRoute element={<Banner />} />} />
       <Route path="/users" element={<ProtectedRoute element={<User />} allowedRoles={['admin', 'superadmin']} />} />
-      <Route path="/activity" element={<ProtectedRoute element={<Activity />} />} />
-      <Route path="/bots-activity" element={<ProtectedRoute element={<BotActivity />} />} />
+      {/* <Route path="/activity" element={<ProtectedRoute element={<Activity />} />} />
+      <Route path="/bots-activity" element={<ProtectedRoute element={<BotActivity />} />} /> */}
       <Route path="/support" element={<ProtectedRoute element={<Support/>} />} />
       <Route path="/notifications" element={<ProtectedRoute element={<Notifications/>} />} />
+      <Route path="/games" element={<ProtectedRoute element={<Games/>} />} />
     </Routes>
   );
 }
