@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Activity, Bot, Image, LayoutDashboard, Menu, Users } from "lucide-react";
+import { Activity, Bot, Image, LayoutDashboard, Menu, Users, UserCog } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { authTokenState, userRoleState } from "@/store/AuthState";
@@ -28,6 +28,7 @@ const allNavItems = [
   { name: "Users", href: "/users", icon: Users, roles: ["superadmin", "admin"] },
   { name: "Activity", href: "/activity", icon: Activity, roles: ["superadmin", "admin", "employee"] },
   { name: "Bots Activity", href: "/bots-activity", icon: Bot, roles: ["superadmin", "admin", "employee"] },
+  { name: "Support", href: "/support", icon: UserCog, roles: ["superadmin", "admin", "employee"] },
 ];
 
 export default function Navbar() {

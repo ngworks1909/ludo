@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { getStorage } from 'firebase/storage'
 import { initializeApp } from 'firebase/app'
+import {getMessaging} from 'firebase/messaging'
 
 // Firebase configuration using environment variables
 const firebaseConfig = {
@@ -15,3 +16,4 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
+export const publisher = getMessaging(app)
