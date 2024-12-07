@@ -5,7 +5,7 @@ export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
     useEffect(() => {
-        fetch("https://klikverse-production.up.railway.app/api/user/fetchalluser", {
+        fetch("http://localhost:3001/api/user/fetchalluser", {
           method: "GET"
         }).then((response) => {
           if(response.ok){

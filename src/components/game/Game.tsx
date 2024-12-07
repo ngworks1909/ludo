@@ -1,13 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2, Users, CreditCard, Trophy, PlusCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from "../common/Navbar"
@@ -15,7 +14,8 @@ import { useGames } from '@/hooks/useGames'
 import { Skeleton } from "@/components/ui/skeleton"
 import {useToast} from '@/hooks/use-toast'
 import { useRecoilValue } from 'recoil'
-import { authTokenState } from '@/store/AuthState'
+import { authTokenState, userRoleState } from '@/store/AuthState'
+import { Navigate, useParams } from 'react-router-dom'
 
 export interface Game {
   gameId: string;
@@ -27,10 +27,9 @@ export interface Game {
   isActive: boolean;
 }
 
-const role = 'superadmin' // This should be dynamically set based on the user's role
 
 export default function GameManager() {
-  const {games, setGames, loading} = useGames()
+  const {games, setGames, loading} = useGames("LUDO")
   const [isToggleModalOpen, setIsToggleModalOpen] = useState(false)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState<Game | null>(null)
@@ -42,8 +41,14 @@ export default function GameManager() {
     currency: '₹',
   })
   const [isCreating, setIsCreating] = useState(false);
+  const { name } = useParams<{ name: string }>()
   const {toast} = useToast()
   const token = useRecoilValue(authTokenState)
+
+  const role = useRecoilValue(userRoleState)
+  if (!role) {
+    return <Navigate to="/login" replace />
+  }
 
   const handleToggleActive = (game: Game) => {
     setSelectedGame(game)
@@ -119,6 +124,17 @@ export default function GameManager() {
       </CardFooter>
     </Card>
   )
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    if (name) {
+        setNewGame({...newGame, gameType: name as Game['gameType']})
+    }
+  }, [name, newGame])
+
+  if (!name) {
+    return <GameSkeleton />
+  }
 
   return (
     <div className="flex min-h-screen w-full flex-col">
@@ -209,20 +225,7 @@ export default function GameManager() {
           <div className="grid gap-6 py-4">
             <div className="space-y-2">
               <Label htmlFor="gameType">Game Type</Label>
-              <Select
-                value={newGame.gameType}
-                onValueChange={(value: Game['gameType']) => setNewGame({...newGame, gameType: value})}
-              >
-                <SelectTrigger id="gameType" className="w-full">
-                  <SelectValue placeholder="Select a game type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="LUDO">LUDO</SelectItem>
-                  <SelectItem value="FAST_LUDO">FAST LUDO</SelectItem>
-                  <SelectItem value="RUMMY">RUMMY</SelectItem>
-                  <SelectItem value="CRICKET">CRICKET</SelectItem>
-                </SelectContent>
-              </Select>
+              <Input type="text" value={newGame.gameType} disabled = {true} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="maxPlayers">Max Players</Label>

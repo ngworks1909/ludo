@@ -11,7 +11,8 @@ import User from './components/users/User';
 import Login from './components/login/Login';
 import Support from './components/support/Support';
 import Notifications from './components/notifications/Notifications';
-import Games from './components/games/Games';
+import Payments from './components/payments/Payments';
+import Game from './components/game/Game';
 // import ForgotPassword from './components/login/ForgotPassword';
 
 const ProtectedRoute: React.FC<{ 
@@ -47,7 +48,8 @@ function AppRoutes() {
       <Route path="/bots-activity" element={<ProtectedRoute element={<BotActivity />} />} /> */}
       <Route path="/support" element={<ProtectedRoute element={<Support/>} />} />
       <Route path="/notifications" element={<ProtectedRoute element={<Notifications/>} />} />
-      <Route path="/games" element={<ProtectedRoute element={<Games/>} />} />
+      <Route path='/payments' element={<ProtectedRoute element={<Payments/>} />} />
+      <Route path='/game/:name' element={<ProtectedRoute element={<Game/>} />} />
     </Routes>
   );
 }

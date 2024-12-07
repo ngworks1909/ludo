@@ -1,10 +1,10 @@
-import { Game } from "@/components/games/Games"
+import { Game } from "@/components/game/Game"
 import { authTokenState } from "@/store/AuthState";
 import { useEffect, useState } from "react"
 import { redirect } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
-export const useGames = () => {
+export const useGames = (gameName: "LUDO" | "FAST_LUSO" | "RUMMY" | "CRICKET") => {
     const token = useRecoilValue(authTokenState)
     
     const [games, setGames] = useState<Game[]>([]);
@@ -14,7 +14,7 @@ export const useGames = () => {
             redirect('/login');
             return
         }
-        fetch("https://klikverse-production.up.railway.app/api/game/fetchAllGames", {
+        fetch(`https://klikverse-production.up.railway.app/api/game/fetchGame/${gameName}`, {
           method: "GET",
           headers: {
             "authorization": token
@@ -29,6 +29,6 @@ export const useGames = () => {
           }
           setLoading(false)
         })
-      }, [token])
+      }, [gameName, token])
     return {games, loading, setGames}
 }
