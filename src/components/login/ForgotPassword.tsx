@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { host } from "@/lib/host"
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
@@ -21,7 +22,7 @@ export default function ForgotPassword() {
     setError("")
     try {
       // Replace this with your actual API call to request OTP
-      const response = await fetch('http://localhost:3001/api/admin/forgot-password', {
+      const response = await fetch(`${host}/api/admin/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

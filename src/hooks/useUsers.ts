@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { User } from "@/components/users/User";
+import { host } from "@/lib/host";
 
 export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
+  const token = sessionStorage.getItem("authToken")
     useEffect(() => {
-        fetch("http://localhost:3001/api/user/fetchalluser", {
-          method: "GET"
+        fetch(`${host}/api/admin/fetchallusers`, {
+          method: "GET",
+          headers: {
+            "authorization": token ?? ""
+          }
         }).then((response) => {
           if(response.ok){
             response.json().then((data) => {
@@ -16,6 +21,6 @@ export const useUsers = () => {
           }
           setLoading(false)
         })
-      }, [])
+      }, [token])
     return {users, loading, setUsers}
 }

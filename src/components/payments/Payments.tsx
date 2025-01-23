@@ -13,6 +13,7 @@ import { usePayments } from '@/hooks/usePayments'
 import { authTokenState, userRoleState } from '@/store/AuthState'
 import { useRecoilValue } from 'recoil'
 import { Navigate } from 'react-router-dom'
+import { host } from '@/lib/host'
 
 export interface Payment {
     withdrawId: string;
@@ -41,7 +42,7 @@ export default function Payments() {
       [id]: { ...prev[id], isApproving: true }
     }))
 
-    const response = await fetch(`https://klikverse-production.up.railway.app/api/transactions/updatewithdraw/${id}`, {
+    const response = await fetch(`${host}/api/transactions/updatewithdraw/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

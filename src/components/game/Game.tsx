@@ -16,6 +16,7 @@ import {useToast} from '@/hooks/use-toast'
 import { useRecoilValue } from 'recoil'
 import { authTokenState, userRoleState } from '@/store/AuthState'
 import { Navigate, useParams } from 'react-router-dom'
+import { host } from '@/lib/host'
 
 export interface Game {
   gameId: string;
@@ -70,7 +71,7 @@ export default function GameManager() {
     if(!token) return
     setIsCreating(true);
     // Simulating API call
-    const response = await fetch('https://klikverse-production.up.railway.app/api/game/create', {
+    const response = await fetch(`${host}/api/game/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

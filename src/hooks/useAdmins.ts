@@ -1,11 +1,17 @@
 import { Admin } from "@/components/admins/Admin";
+import { host } from "@/lib/host";
 import { useEffect, useState } from "react";
 export const useAdmins = () => {
   const [admins, setAdmins] = useState<Admin[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
+  const token = sessionStorage.getItem('authToken')
     useEffect(() => {
-        fetch("https://klikverse-production.up.railway.app/api/admin/admins", {
-          method: "GET"
+        fetch(`${host}/api/admin/admins`, {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+             "authorization": token ?? ""
+          }
         }).then((response) => {
           if(response.ok){
             response.json().then((data) => {
@@ -15,6 +21,6 @@ export const useAdmins = () => {
           }
           setLoading(false)
         })
-      }, [])
+      }, [token])
     return {admins, loading, setAdmins}
 }

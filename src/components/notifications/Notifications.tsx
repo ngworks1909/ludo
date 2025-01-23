@@ -9,6 +9,7 @@ import { toast } from "@/hooks/use-toast"
 import { useRecoilValue } from 'recoil'
 import { authTokenState } from '@/store/AuthState'
 import Navbar from '../common/Navbar'
+import { host } from '@/lib/host'
 
 export default function PushNotificationSender() {
   const [title, setTitle] = useState('')
@@ -30,7 +31,7 @@ export default function PushNotificationSender() {
 
     setIsSending(true)
     // Simulating API call
-    const response = await fetch('https://klikverse-production.up.railway.app/api/admin/sendmessage', {
+    const response = await fetch(`${host}/api/admin/sendmessage`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

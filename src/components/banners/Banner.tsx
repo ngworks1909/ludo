@@ -29,6 +29,7 @@ import { useToast } from "@/hooks/use-toast"
 import Navbar from "../common/Navbar"
 import { uploadFile } from "@/functions/uploadFile"
 import { deleteObject, ref } from "firebase/storage"
+import { host } from "@/lib/host"
 
 
 
@@ -71,7 +72,7 @@ export default function BannerPage() {
     try {
       // Simulate file upload and getting the uploaded URL
       const uploadedImageUrl = await uploadFile(newBannerFile); // Upload the file and get the URL
-      const response = await fetch('https://klikverse-production.up.railway.app/api/banner/upload', {
+      const response = await fetch(`${host}/api/banner/upload`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -122,7 +123,7 @@ export default function BannerPage() {
   const deleteBanner = async(id: string) => {
 
     try {
-      const response = await fetch(`https://klikverse-production.up.railway.app/api/banner/deletebanner/${id}`, {
+      const response = await fetch(`${host}/api/banner/deletebanner/${id}`, {
         method: "DELETE"
       })
       if(response.status === 200){
@@ -163,7 +164,7 @@ export default function BannerPage() {
 
   const updateBanner = async() => {
     if (editingBanner) {
-      const response = await fetch(`https://klikverse-production.up.railway.app/api/banner/updatebanner/${editingBanner.id}`, {
+      const response = await fetch(`${host}/api/banner/updatebanner/${editingBanner.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -194,7 +195,7 @@ export default function BannerPage() {
   }
 
   useEffect(() => {
-    fetch("https://klikverse-production.up.railway.app/api/banner/fetchallbanners", {
+    fetch(`${host}/api/banner/fetchallbanners`, {
       method: "GET",
     }).then((response) => {
       if(response.status === 200){

@@ -22,6 +22,7 @@ import { useUsers } from '@/hooks/useUsers'
 import { useRecoilValue } from 'recoil'
 import { authTokenState, userRoleState } from '@/store/AuthState'
 import { useToast } from '@/hooks/use-toast'
+import { host } from '@/lib/host'
 
 export type User = {
   userId: string;
@@ -90,7 +91,7 @@ export default function Users() {
         setUsers(users.map(user => 
           user.userId === suspendUserId ? { ...user, suspended: true } : user
         ))
-        const response = await fetch(`http://localhost:3001/api/user/suspend/${suspendUserId}`, {
+        const response = await fetch(`${host}/api/user/suspend/${suspendUserId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

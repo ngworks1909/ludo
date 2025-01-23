@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast"
 import { useAdmins } from "@/hooks/useAdmins"
 import Navbar from "../common/Navbar"
 import { Skeleton } from "../ui/skeleton"
+import { host } from "@/lib/host"
 
 export type Admin = {
   adminId: string
@@ -35,6 +36,7 @@ export default function AdminManagement() {
   const navigate = useNavigate()
   const setAuth = useSetRecoilState(authTokenState)
   const { toast } = useToast()
+  const token = useRecoilValue(authTokenState)
 
   const currentUserRole = useRecoilValue(userRoleState)
   if (!currentUserRole) {
@@ -61,10 +63,11 @@ export default function AdminManagement() {
   const handleUpdate = async () => {
     if (selectedAdmin) {
       try {
-        const response = await fetch(`https://klikverse-production.up.railway.app/api/admin/edit/${selectedAdmin.adminId}`, {
+        const response = await fetch(`${host}/api/admin/edit/${selectedAdmin.adminId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
+            "authorization": token ?? ""
           },
           body: JSON.stringify({ name: updatedName, email: updatedEmail }),
         })
@@ -101,8 +104,12 @@ export default function AdminManagement() {
 
   const handleDeleteAdmin = async (adminId: string) => {
     try {
-      const response = await fetch(`https://klikverse-production.up.railway.app/api/admin/delete/${adminId}`, {
+      const response = await fetch(`${host}/api/admin/delete/${adminId}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          "authorization": token ?? ""
+        }
       })
 
       if (response.ok) {
@@ -142,10 +149,11 @@ export default function AdminManagement() {
 
   const handleTransfer = async (newSuperadminId: string) => {
     try {
-      const response = await fetch(`https://klikverse-production.up.railway.app/api/admin/transfer/${newSuperadminId}`, {
+      const response = await fetch(`${host}/api/admin/transfer/${newSuperadminId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          "authorization": token ?? ""
         }
       })
 

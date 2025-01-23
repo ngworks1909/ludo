@@ -2,6 +2,7 @@ import { authTokenState } from "@/store/AuthState";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { redirect } from "react-router-dom";
+import { host } from "@/lib/host";
 
 export interface Payment {
     withdrawId: string;
@@ -23,7 +24,7 @@ export const usePayments = () => {
             redirect('/login');
             return
         }
-        fetch("https://klikverse-production.up.railway.app/api/transactions/fetchallwithdraws", {
+        fetch(`${host}/api/admin/fetchallwithdraw`, {
           method: "GET",
           headers: {
             "authorization": token

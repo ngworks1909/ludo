@@ -19,6 +19,7 @@ import { useTickets } from '@/hooks/useTickets'
 import { Skeleton } from "@/components/ui/skeleton"
 import { InboxIcon, Loader2 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { host } from '@/lib/host'
 
 export interface Ticket {
   ticketId: string;
@@ -86,7 +87,7 @@ export default function SupportPage() {
   const handleSendResponse = async () => {
     if (selectedTicket && textarea.trim()) {
       setIsSending(true)
-      const response = await fetch("https://klikverse-production.up.railway.app/api/ticket/resolve", {
+      const response = await fetch(`${host}/api/ticket/resolve`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

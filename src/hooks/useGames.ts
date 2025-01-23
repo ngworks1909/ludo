@@ -1,4 +1,5 @@
 import { Game } from "@/components/game/Game"
+import { host } from "@/lib/host";
 import { authTokenState } from "@/store/AuthState";
 import { useEffect, useState } from "react"
 import { redirect } from "react-router-dom";
@@ -14,7 +15,7 @@ export const useGames = (gameName: "LUDO" | "FAST_LUSO" | "RUMMY" | "CRICKET") =
             redirect('/login');
             return
         }
-        fetch(`https://klikverse-production.up.railway.app/api/game/fetchGame/${gameName}`, {
+        fetch(`${host}/api/game/fetchGame/${gameName}`, {
           method: "GET",
           headers: {
             "authorization": token

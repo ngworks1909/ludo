@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { host } from "@/lib/host"
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
@@ -25,7 +26,7 @@ export default function Login() {
     e.preventDefault()
     setIsLoading(true)
     try {
-      const response = await fetch("https://klikverse-production.up.railway.app/api/admin/login", {
+      const response = await fetch(`${host}/api/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
