@@ -12,15 +12,6 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAKd2nWiPn9r_akkY-beEvbTBBiZjIdmUo",
-//   authDomain: "klik-234a9.firebaseapp.com",
-//   projectId: "klik-234a9",
-//   storageBucket: "klik-234a9.firebasestorage.app",
-//   messagingSenderId: "627942018478",
-//   appId: "1:627942018478:web:b78aff5586feca44638c3f",
-//   measurementId: "G-X0SV410YW5"
-// };
 
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
