@@ -15,6 +15,8 @@ export default function GameCard({game}: {game: {name: string, icon: string, cou
   const navigate = useNavigate()
   const [isHovered, setIsHovered] = useState(false)
 
+  
+
   const handleClick = () => {
     navigate(`/game/${encodeURIComponent(game.name.toUpperCase())}`)
   }

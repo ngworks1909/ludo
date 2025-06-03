@@ -1,1 +1,1 @@
-export const host = "https://server.fivlog.space"
+export const host = "https://backend-klik.fivlog.space"

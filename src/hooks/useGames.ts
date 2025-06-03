@@ -5,13 +5,16 @@ import { useEffect, useState } from "react"
 import { redirect } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
-export const useGames = (gameName: "LUDO" | "FAST_LUSO" | "RUMMY" | "CRICKET") => {
+export type GameName = "LUDO" | "FAST_LUDO" | "RUMMY" | "CRICKET" | "MEMORYGAME"
+
+export const useGames = (gameName: GameName) => {
     const token = useRecoilValue(authTokenState)
     
     const [games, setGames] = useState<Game[]>([]);
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         if(!token){
+            setLoading(false)
             redirect('/login');
             return
         }
@@ -30,6 +33,6 @@ export const useGames = (gameName: "LUDO" | "FAST_LUSO" | "RUMMY" | "CRICKET") =
           }
           setLoading(false)
         })
-      }, [gameName, token])
+      }, [token])
     return {games, loading, setGames}
 }

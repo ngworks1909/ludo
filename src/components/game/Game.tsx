@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Loader2, Users, CreditCard, Trophy, PlusCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from "../common/Navbar"
-import { useGames } from '@/hooks/useGames'
+import { GameName, useGames } from '@/hooks/useGames'
 import { Skeleton } from "@/components/ui/skeleton"
 import {useToast} from '@/hooks/use-toast'
 import { useRecoilValue } from 'recoil'
@@ -30,7 +30,8 @@ export interface Game {
 
 
 export default function GameManager() {
-  const {games, setGames, loading} = useGames("LUDO")
+  const { name } = useParams<{ name: string }>()
+  const {games, setGames, loading} = useGames(name as GameName)
   const [isToggleModalOpen, setIsToggleModalOpen] = useState(false)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState<Game | null>(null)
@@ -42,7 +43,6 @@ export default function GameManager() {
     currency: '₹',
   })
   const [isCreating, setIsCreating] = useState(false);
-  const { name } = useParams<{ name: string }>()
   const {toast} = useToast()
   const token = useRecoilValue(authTokenState)
 
@@ -56,14 +56,24 @@ export default function GameManager() {
     setIsToggleModalOpen(true)
   }
 
-  const confirmToggleActive = () => {
+  const confirmToggleActive = async() => {
+    console.log(selectedGame)
     if (selectedGame) {
-      setGames(games.map(game =>
+      const response = await fetch(`${host}/api/game/disableGame/${selectedGame.gameId}`,{
+        method: "PUT",
+        headers: {
+          "authorization": token as string
+        }
+      } );
+
+      if(response.ok){
+        setGames(games.map(game =>
         game.gameId === selectedGame.gameId
           ? { ...game, isActive: !game.isActive }
           : game
       ))
       setIsToggleModalOpen(false)
+      }
     }
   }
 
