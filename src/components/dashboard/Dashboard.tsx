@@ -3,7 +3,7 @@ import Navbar from "../common/Navbar"
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import { Skeleton } from "../ui/skeleton"
 import GameCard from "./GameCard"
-import { useDashboard } from "@/hooks/useDashBoard"
+import { useDashboard } from "@/hooks/useDashboard"
 
 export default function Dashboard() {
   const gameStats = [
