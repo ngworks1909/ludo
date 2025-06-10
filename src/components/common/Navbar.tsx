@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {  Image, LayoutDashboard, Menu, Users, UserCog, Bell, CreditCard } from "lucide-react";
+import {  Image, LayoutDashboard, Menu, Users, UserCog, CreditCard } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { authTokenState, userRoleState } from "@/store/AuthState";
@@ -29,8 +29,9 @@ const allNavItems = [
   // { name: "Activity", href: "/activity", icon: Activity, roles: ["superadmin", "admin", "employee"] },
   // { name: "Bots Activity", href: "/bots-activity", icon: Bot, roles: ["superadmin", "admin", "employee"] },
   { name: "Support", href: "/support", icon: UserCog, roles: ["superadmin", "admin", "employee"] },
-  { name: "Notifications", href: "/notifications", icon: Bell, roles: ["superadmin", "admin", "employee"] },
-  { name: "Payments", href: "/payments", icon: CreditCard, roles: ["superadmin", "admin", "employee"] },
+  // { name: "Notifications", href: "/notifications", icon: Bell, roles: ["superadmin", "admin", "employee"] },
+  { name: "Feedback", href: "/feedback", icon: CreditCard, roles: ["superadmin", "admin", "employee"] },
+  { name: "Payouts", href: "/payments", icon: CreditCard, roles: ["superadmin", "admin", "employee"] },
 ];
 
 export default function Navbar() {

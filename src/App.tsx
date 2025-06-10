@@ -10,9 +10,10 @@ import User from './components/users/User';
 // import BotActivity from './components/botsactivity/BotActivity';
 import Login from './components/login/Login';
 import Support from './components/support/Support';
-import Notifications from './components/notifications/Notifications';
+// import Notifications from './components/notifications/Notifications';
 import Payments from './components/payments/Payments';
 import Game from './components/game/Game';
+import Feedback from './components/feedback/Feedback';
 // import ForgotPassword from './components/login/ForgotPassword';
 
 const ProtectedRoute: React.FC<{ 
@@ -47,8 +48,9 @@ function AppRoutes() {
       {/* <Route path="/activity" element={<ProtectedRoute element={<Activity />} />} />
       <Route path="/bots-activity" element={<ProtectedRoute element={<BotActivity />} />} /> */}
       <Route path="/support" element={<ProtectedRoute element={<Support/>} />} />
-      <Route path="/notifications" element={<ProtectedRoute element={<Notifications/>} />} />
+      {/* <Route path="/notifications" element={<ProtectedRoute element={<Notifications/>} />} /> */}
       <Route path='/payments' element={<ProtectedRoute element={<Payments/>} />} />
+      <Route path='/feedback' element={<ProtectedRoute element={<Feedback/>} />} />
       <Route path='/game/:name' element={<ProtectedRoute element={<Game/>} />} />
     </Routes>
   );

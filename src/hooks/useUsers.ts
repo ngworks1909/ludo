@@ -4,6 +4,7 @@ import { authTokenState } from "@/store/AuthState"
 import { UserInterface } from "@/components/users/User"
 import { useRecoilValue } from "recoil"
 import { useToast } from "./use-toast"
+import { host } from "@/lib/host"
 
 export function useUsers(limit = 10) {
   const [users, setUsers] = useState<UserInterface[]>([])
@@ -26,7 +27,7 @@ export function useUsers(limit = 10) {
     try {
       const currentSkip = isInitialFetch ? 0 : skip
       
-      const response = await fetch(`http://localhost:3001/api/user/fetchall?skip=${currentSkip}&limit=${limit}`, {
+      const response = await fetch(`${host}/api/user/fetchall?skip=${currentSkip}&limit=${limit}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -66,6 +67,7 @@ export function useUsers(limit = 10) {
     } finally {
       setLoading(false)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, loading, hasMore, skip, limit])
 
   // Initial fetch when component mounts or token changes
@@ -78,6 +80,7 @@ export function useUsers(limit = 10) {
       setInitialFetchDone(false)
       fetchUsers(true) // Pass true to indicate initial fetch
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])
 
   // Expose a fetchMore function that doesn't reset the state
